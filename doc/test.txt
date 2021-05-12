@@ -1,0 +1,11 @@
+获取标签列表
+curl 127.0.0.1:8000/api/v1/tags
+
+新建标签
+curl -X POST --data "" http://127.0.0.1:8000/api/v1/tags\?name\=2\&state\=1\&created_by\=test
+
+更新指定标签
+curl -X PUT --data "" http://127.0.0.1:8000/api/v1/tags/1\?name\=edit1\&state\=0\&modified_by\=edit1
+
+删除指定标签
+curl -X DELETE http://127.0.0.1:8000/api/v1/tags/1
