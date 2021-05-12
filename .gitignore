@@ -24,6 +24,8 @@ profiles.xml
 /dist/
 /nbdist/
 /.nb-gradle/
+
+runtime
 # Compiled class file
 *.class
 

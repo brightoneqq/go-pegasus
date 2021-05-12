@@ -1,12 +1,16 @@
 package router
 
 import (
-	v1 "github.com/brightoneqq/go-pegasus/pkg/router/v1"
+	"github.com/brightoneqq/go-pegasus/middleware/jwt"
+	"github.com/brightoneqq/go-pegasus/pkg/logging"
+	"github.com/brightoneqq/go-pegasus/pkg/router/api"
+	v1 "github.com/brightoneqq/go-pegasus/pkg/router/api/v1"
 	"github.com/brightoneqq/go-pegasus/pkg/setting"
 	"github.com/gin-gonic/gin"
 )
 
 func InitRouter() *gin.Engine {
+	logging.Info("*******************")
 	r := gin.New()
 
 	r.Use(gin.Logger())
@@ -20,8 +24,11 @@ func InitRouter() *gin.Engine {
 			"message": "test",
 		})
 	})
+	r.GET("/auth", api.GetAuth)
 
 	apiv1 := r.Group("/api/v1")
+
+	apiv1.Use(jwt.JWT())
 	{
 		//获取标签列表
 		apiv1.GET("/tags", v1.GetTags)
@@ -43,6 +50,5 @@ func InitRouter() *gin.Engine {
 		//删除指定文章
 		apiv1.DELETE("/articles/:id", v1.DeleteArticle)
 	}
-
 	return r
 }
