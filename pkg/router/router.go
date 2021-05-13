@@ -7,6 +7,8 @@ import (
 	v1 "github.com/brightoneqq/go-pegasus/pkg/router/api/v1"
 	"github.com/brightoneqq/go-pegasus/pkg/setting"
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
 func InitRouter() *gin.Engine {
@@ -25,6 +27,7 @@ func InitRouter() *gin.Engine {
 		})
 	})
 	r.GET("/auth", api.GetAuth)
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	apiv1 := r.Group("/api/v1")
 
