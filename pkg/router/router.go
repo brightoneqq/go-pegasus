@@ -1,14 +1,11 @@
 package router
 
 import (
-	"github.com/brightoneqq/go-pegasus/middleware/jwt"
 	"github.com/brightoneqq/go-pegasus/pkg/logging"
 	"github.com/brightoneqq/go-pegasus/pkg/router/api"
 	v1 "github.com/brightoneqq/go-pegasus/pkg/router/api/v1"
 	"github.com/brightoneqq/go-pegasus/pkg/setting"
 	"github.com/gin-gonic/gin"
-	ginSwagger "github.com/swaggo/gin-swagger"
-	"github.com/swaggo/gin-swagger/swaggerFiles"
 )
 
 func InitRouter() *gin.Engine {
@@ -27,11 +24,12 @@ func InitRouter() *gin.Engine {
 		})
 	})
 	r.GET("/auth", api.GetAuth)
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	//r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	apiv1 := r.Group("/api/v1")
 
-	apiv1.Use(jwt.JWT())
+	//apiv1.Use(jwt.JWT())
+	apiv1.Use()
 	{
 		//获取标签列表
 		apiv1.GET("/tags", v1.GetTags)
